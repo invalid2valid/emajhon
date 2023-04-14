@@ -2,17 +2,18 @@ import React, { useEffect, useState } from "react";
 import Card from "./Card";
 
 const Shop = () => {
-  const [orginalData, setOrginalData] = useState([]);
+  const [cart, setCart] = useState([]);
   const [data, setData] = useState([]);
   const [seeAll, setSeeAll] = useState(false);
   const [filterBy, setFilterBy] = useState("See All");
+  const [orginalData, setOrginalData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
-  const [cart, setCart] = useState([]);
 
   const handleAddToCart = (product) => {
     // cart.push(product);
     const newCart = [...cart, product];
     setCart(newCart);
+
     console.log(cart);
   };
 
@@ -21,9 +22,9 @@ const Shop = () => {
 
   const filterData = (data) => {
     setOrginalData(data);
-    const listFilter = data.map((item) => (
-      <option value="{item.category}">{item.category}</option>
-    ));
+    // const listFilter = data.map((item) => (
+    //   <option value="{item.category}">{item.category}</option>
+    // ));
 
     if (filterBy === "See All") {
       setFilteredData(data);
@@ -47,7 +48,7 @@ const Shop = () => {
   // .slice(0, 12)
   useEffect(() => {
     fetch("products.json").then((res) => res.json().then((d) => filterData(d)));
-  }, [filterBy, filteredData]);
+  }, [filteredData]);
   // console.log(data);
   return (
     <div className="relative flex min-h-[85vh] m-6 max-w-[1440px] mx-auto">

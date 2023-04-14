@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 
-const Card = ({ data }) => {
-  const { img, name, seller, ratings, price, id } = data;
+const Card = (props) => {
+  const { img, name, seller, ratings, price, id } = props.data;
   // console.log("hello");
   return (
     <div className="w-[300px] h-[510px] border-2 border-[#95A0A7] rounded-md relative">
@@ -18,7 +18,7 @@ const Card = ({ data }) => {
         <p className="mt-[6px]">Rating: {ratings} Stars</p>
       </div>
       <button
-        onClick={() => data.handleAddToCart(data)}
+        onClick={() => props.handleAddToCart(props.data)}
         className="items-center flex justify-center gap-3 font-bold w-full py-2 bg-[#FFE0B3]  absolute bottom-0 hover:bg-orange-400 rounded-b-md"
       >
         <p>Add to Cart</p> <ShoppingCartIcon className="h-5 " />
