@@ -3,17 +3,42 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import Login from "./Component/Login/Login";
+import Shop from "./Component/Main/Shop";
+import LandingPage from "./Component/LandingPage/LandingPage";
+import Order from "./Component/Order/Order";
+import AuthProvider from "./Component/Provider/AuthProvider";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    children: [
+      {
+        path: "/",
+        element: <LandingPage />,
+      },
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "shop",
+        element: <Shop />,
+      },
+      {
+        path: "order",
+        element: <Order />,
+      },
+    ],
     // errorElement: <ErrorPage />,
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>
 );

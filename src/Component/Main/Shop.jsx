@@ -1,24 +1,38 @@
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
+import { Link } from "react-router-dom";
+import { FaArrowRight, FaTrashAlt } from "react-icons/fa";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 
 const Shop = () => {
-  const [cart, setCart] = useState([]);
+  const cartClear = () => toast("Your Cart Is Clear");
   const [data, setData] = useState([]);
+  const [cart, setCart] = useState([]);
+  const [price, setPrice] = useState(0);
   const [seeAll, setSeeAll] = useState(false);
   const [filterBy, setFilterBy] = useState("See All");
   const [orginalData, setOrginalData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
 
-  const handleAddToCart = (product) => {
-    // cart.push(product);
-    const newCart = [...cart, product];
-    setCart(newCart);
-
-    console.log(cart);
+  const clearCart = () => {
+    setCart([]);
+    setPrice(0);
+    cartClear();
   };
 
-  // console.log(cart);
-  // console.log(cart);
+  // console.log(JSON.parse(localData));
+  const handleAddToCart = (product) => {
+    // const newCart = [...cart, product];
+    setCart([...cart, product]);
+    // tempPrice = 0;
+  };
+
+  useEffect(() => {
+    cart.forEach((element) => {
+      setPrice(price + element.price);
+    });
+  }, [cart]);
 
   const filterData = (data) => {
     setOrginalData(data);
@@ -50,6 +64,11 @@ const Shop = () => {
     fetch("products.json").then((res) => res.json().then((d) => filterData(d)));
   }, [filteredData]);
   // console.log(data);
+
+  const setLocatData = () => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  };
+
   return (
     <div className="relative flex min-h-[85vh] m-6 max-w-[1440px] mx-auto">
       <div className="w-4/5">
@@ -93,7 +112,27 @@ const Shop = () => {
             <option value="Men's T shirt">Men's T shirt</option>
           </select>
         </div>
-        <div className="rounded-lg bg-[#FFE0B3] w-full h-[80vh]"></div>
+        <div className="rounded-lg bg-[#FFE0B3] w-full h-[440px] flex flex-col p-6 text-center gap-5 text-lg font-semibold">
+          <h2>Item: {cart.length}</h2>
+          <p> Price: ${price}</p>
+          <p>Tax: $5</p>
+          <p>Shiping: ${cart.length * 2}</p>
+          <p>Total: ${cart.length * 2 + price + 5}</p>
+          <div className="w-full">
+            <button
+              onClick={clearCart}
+              className="bg-[#FF3030] h-[48px] w-full rounded-lg mt-5 mb-4 flex justify-center items-center gap-2 text-white"
+            >
+              <span>Clear Cart</span> <FaTrashAlt />
+            </button>
+            <ToastContainer />
+            <Link to="/order" onClick={setLocatData}>
+              <button className="bg-[#FF9900] h-[48px] w-full rounded-lg mt-5 mb-4 flex justify-center items-center gap-2 text-white ">
+                <span>Review Order </span> <FaArrowRight />
+              </button>
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   );
