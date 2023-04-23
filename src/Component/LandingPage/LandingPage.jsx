@@ -6,7 +6,7 @@ const LandingPage = () => {
   let index = 1;
 
   return (
-    <div className="min-h-[85vh] max-w-[1440px] mx-auto flex justify-around items-center gap-20">
+    <div className="min-h-[85vh] my-10 max-w-[1440px] mx-auto flex justify-around items-center gap-20">
       <div>
         <p className="text-[#FF9900]">Sale up to 70% off</p>
         <div className="my-16">

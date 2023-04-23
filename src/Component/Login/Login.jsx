@@ -2,9 +2,11 @@ import React, { useContext, useState } from "react";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import app from "../../firebase.config";
 import { AuthContext } from "../Provider/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [login, setLogin] = useState(false);
+  const navigate = useNavigate();
+  const [login, setLogin] = useState(true);
   const [error, setError] = useState("");
   const { creatUser, sginIn, setUser, googleLogIn } = useContext(AuthContext);
 
@@ -28,6 +30,8 @@ const Login = () => {
         console.log(result.user);
 
         console.log(loggedUser);
+        form.reset();
+        navigate("/shop");
       })
       .catch((error) => {
         console.log(error);
@@ -45,6 +49,8 @@ const Login = () => {
     sginIn(email, password)
       .then((userCredential) => {
         const user = userCredential.user;
+        form.reset();
+        navigate("/shop");
       })
       .catch((error) => {
         setError(error.message);

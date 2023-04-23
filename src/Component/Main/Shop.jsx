@@ -70,7 +70,7 @@ const Shop = () => {
   };
 
   return (
-    <div className="relative flex min-h-[85vh] m-6 max-w-[1440px] mx-auto">
+    <div className="relative flex min-h-[85vh] p-2 max-w-[1440px] mx-auto">
       <div className="w-4/5">
         <div className="grid grid-col-1 md:grid-cols-2  lg:grid-cols-3 justify-items-left gap-6   ">
           {data.map((infos) => (

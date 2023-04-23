@@ -8,6 +8,8 @@ import Shop from "./Component/Main/Shop";
 import LandingPage from "./Component/LandingPage/LandingPage";
 import Order from "./Component/Order/Order";
 import AuthProvider from "./Component/Provider/AuthProvider";
+import PrivateRoute from "./Component/Routes/PrivateRoute";
+import Confirmed from "./Component/Order/Confirmed";
 
 const router = createBrowserRouter([
   {
@@ -24,11 +26,27 @@ const router = createBrowserRouter([
       },
       {
         path: "shop",
-        element: <Shop />,
+        element: (
+          <PrivateRoute>
+            <Shop />
+          </PrivateRoute>
+        ),
       },
       {
         path: "order",
-        element: <Order />,
+        element: (
+          <PrivateRoute>
+            <Order />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "thankyou",
+        element: (
+          <PrivateRoute>
+            <Confirmed />
+          </PrivateRoute>
+        ),
       },
     ],
     // errorElement: <ErrorPage />,

@@ -39,19 +39,24 @@ const Header = () => {
         >
           Order
         </NavLink>
-        <NavLink
-          className={({ isActive }) =>
-            isActive ? "text-orange-700" : "hover:text-orange-200"
-          }
-          to="login"
-        >
-          Get In
-        </NavLink>
+        {!user && (
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? "text-orange-700" : "hover:text-orange-200"
+            }
+            to="login"
+          >
+            Get In
+          </NavLink>
+        )}
         {user && (
           <span>
             {user.email}
-            <button onClick={handleLogOut} className="ml-1">
-              log out
+            <button
+              onClick={handleLogOut}
+              className="ml-4 bg-white rounded-md  text-black px-2"
+            >
+              Log out
             </button>
           </span>
         )}
