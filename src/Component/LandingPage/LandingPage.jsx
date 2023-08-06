@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Login from "../Login/Login";
 
 const LandingPage = () => {
   const [pic, setPic] = useState(1);
@@ -20,14 +21,15 @@ const LandingPage = () => {
         </button>
       </div>
       <div className="relative">
-        <div className="w-[451px] bg-[#FFE0B3]  h-[633px] rounded-lg"></div>
+        {/* <div className="w-[451px] bg-[#FFE0B3]  h-[633px] rounded-lg"></div>
         <div className="w-[451px] h-[633px] absolute -top-3 bg-slate-400 -right-3 rounded-lg">
           <img
             className="object-cover rounded-lg  w-[451px] h-[633px]"
             src="photo/1.jpg"
             alt=""
           />
-        </div>
+        </div> */}
+        <Login></Login>
       </div>
     </div>
   );

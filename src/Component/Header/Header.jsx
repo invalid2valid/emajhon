@@ -35,9 +35,17 @@ const Header = () => {
           className={({ isActive }) =>
             isActive ? "text-orange-700" : "hover:text-orange-200"
           }
-          to="order"
+          to="modifyproduct"
         >
-          Order
+          Modify Product
+        </NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "text-orange-700" : "hover:text-orange-200"
+          }
+          to="addproduct"
+        >
+          Add a Product
         </NavLink>
         {!user && (
           <NavLink

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Card from "./Card";
+import ModifiedCard from "./ModifiedCard";
 import { Link } from "react-router-dom";
 import { FaArrowRight, FaTrashAlt } from "react-icons/fa";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 
-const Shop = () => {
+const ModifyProduct = () => {
   const cartClear = () => toast("Your Cart Is Clear");
   const [data, setData] = useState([]);
   const [cart, setCart] = useState([]);
@@ -15,25 +15,7 @@ const Shop = () => {
   const [orginalData, setOrginalData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [loader, setLoader] = useState(true);
-
-  const clearCart = () => {
-    setCart([]);
-    setPrice(0);
-    cartClear();
-  };
-
-  // console.log(JSON.parse(localData));
-  const handleAddToCart = (product) => {
-    // const newCart = [...cart, product];
-    setCart([...cart, product]);
-    // tempPrice = 0;
-  };
-
-  useEffect(() => {
-    cart.forEach((element) => {
-      setPrice(price + element.price);
-    });
-  }, [cart]);
+  const [control, setControl] = useState(true);
 
   const filterData = (data) => {
     setOrginalData(data);
@@ -69,7 +51,7 @@ const Shop = () => {
         setLoader(false);
       })
     );
-  }, [filteredData]);
+  }, [filteredData, control]);
   // console.log(data);
 
   const setLocatData = () => {
@@ -79,16 +61,18 @@ const Shop = () => {
   if (loader) {
     return <h1 className="text-center min-h-screen">Loading</h1>;
   }
+
   return (
     <div className="relative flex min-h-[85vh] p-2 max-w-[1440px] mx-auto">
       <div className="w-4/5">
         <div className="grid grid-col-1 md:grid-cols-2  lg:grid-cols-3 justify-items-left gap-6   ">
           {data.map((infos) => (
-            <Card
-              handleAddToCart={handleAddToCart}
+            <ModifiedCard
+              //   handleAddToCart={handleAddToCart}
               data={infos}
-              key={infos.id}
-            ></Card>
+              key={infos._id}
+              //   deleteHandel={deleteHandel}
+            ></ModifiedCard>
           ))}
         </div>
         <div className=" mt-5 flex justify-center">
@@ -122,7 +106,7 @@ const Shop = () => {
             <option value="Men's T shirt">Men's T shirt</option>
           </select>
         </div>
-        <div className="rounded-lg bg-[#FFE0B3] w-full h-[440px] flex flex-col p-6 text-center gap-5 text-lg font-semibold">
+        {/* <div className="rounded-lg bg-[#FFE0B3] w-full h-[440px] flex flex-col p-6 text-center gap-5 text-lg font-semibold">
           <h2>Item: {cart.length}</h2>
           <p> Price: ${price}</p>
           <p>Tax: $5</p>
@@ -142,10 +126,13 @@ const Shop = () => {
               </button>
             </Link>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
 };
 
-export default Shop;
+// export default Shop;
+
+export default ModifyProduct;
+// ModifyProduct

@@ -1,11 +1,11 @@
 import React, { useContext, useState } from "react";
-import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
-import app from "../../firebase.config";
 import { AuthContext } from "../Provider/AuthProvider";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
+  const loacation = useLocation();
+  const from = loacation.state?.from?.pathname || "/";
   const [login, setLogin] = useState(true);
   const [error, setError] = useState("");
   const { creatUser, sginIn, setUser, googleLogIn } = useContext(AuthContext);
@@ -30,8 +30,9 @@ const Login = () => {
         console.log(result.user);
 
         console.log(loggedUser);
-        form.reset();
-        navigate("/shop");
+
+        // navigate(from, { replace: true });
+        navigate("/shop", { replace: true });
       })
       .catch((error) => {
         console.log(error);
@@ -41,6 +42,7 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
+    console.log("login submited clicked");
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
@@ -49,8 +51,11 @@ const Login = () => {
     sginIn(email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        form.reset();
-        navigate("/shop");
+        console.log("login");
+        // navigate(from, { replace: true });
+        navigate("/shop", { replace: true });
+        console.log(from);
+        // return <Navigate to={from} replace></Navigate>;
       })
       .catch((error) => {
         setError(error.message);

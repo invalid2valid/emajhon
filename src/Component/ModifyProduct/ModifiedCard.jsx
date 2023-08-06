@@ -3,9 +3,10 @@ import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 import { AuthContext } from "../Provider/AuthProvider";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { Link } from "react-router-dom";
 AOS.init();
-const Card = (props) => {
-  const { img, name, seller, ratings, price, id } = props.data;
+const ModifiedCard = (props) => {
+  const { img, name, seller, ratings, price, _id } = props.data;
   const { user } = useContext(AuthContext);
   const [btncondition, setbtnCondition] = useState(true);
 
@@ -18,6 +19,15 @@ const Card = (props) => {
   }, [user]);
 
   // console.log("hello");
+
+  const deleteHandel = (id) => {
+    console.log(id);
+    fetch(`http://localhost:8000/delete/${id}`, {
+      method: "DELETE",
+    }).then((res) => res.json());
+    //   .then((data) => (setControl(!control), console.log(data)));
+  };
+
   return (
     <div
       data-aos="fade-up"
@@ -34,15 +44,30 @@ const Card = (props) => {
         <p className="mt-[6px]">Manufacturer: {seller}</p>
         <p className="mt-[6px]">Rating: {ratings} Stars</p>
       </div>
-      <button
-        disabled={btncondition}
-        onClick={() => props.handleAddToCart(props.data)}
+      <div
+        // disabled={btncondition}
+        // onClick={() => props.handleAddToCart(props.data)}
         className=" items-center flex justify-center gap-3 font-bold w-full py-2 bg-[#FFE0B3]  absolute bottom-0 hover:bg-orange-400 rounded-b-md"
       >
-        <p>Add to Cart</p> <ShoppingCartIcon className="h-5 " />
-      </button>
+        <div className="">
+          <Link to={`/update/${_id}`} className="p-2 mx-2 bg-white rounded-md">
+            Update
+          </Link>
+          <button
+            onClick={() => deleteHandel(_id)}
+            className="p-2 mx-2 bg-white rounded-md"
+          >
+            Delete{" "}
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default Card;
+// export default Card;
+
+export default ModifiedCard;
+/**<Link to={`/update/${toy._id}`} className="btn btn-ghost btn-xs">
+            Update
+          </Link> */

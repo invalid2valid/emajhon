@@ -10,6 +10,9 @@ import Order from "./Component/Order/Order";
 import AuthProvider from "./Component/Provider/AuthProvider";
 import PrivateRoute from "./Component/Routes/PrivateRoute";
 import Confirmed from "./Component/Order/Confirmed";
+import AddProdect from "./Component/AddProduct/AddProdect";
+import ModifyProduct from "./Component/ModifyProduct/ModifyProduct";
+import Update from "./Component/ModifyProduct/Update";
 
 const router = createBrowserRouter([
   {
@@ -25,11 +28,23 @@ const router = createBrowserRouter([
         element: <Login />,
       },
       {
+        path: "/addproduct",
+        element: <AddProdect></AddProdect>,
+      },
+      {
+        path: "/modifyproduct",
+        element: <ModifyProduct></ModifyProduct>,
+      },
+      {
+        path: "update/:id",
+        element: <Update></Update>,
+      },
+      {
         path: "shop",
         element: (
-          <PrivateRoute>
-            <Shop />
-          </PrivateRoute>
+          // <PrivateRoute>
+          <Shop />
+          // </PrivateRoute>
         ),
       },
       {

@@ -36,9 +36,9 @@ const Order = () => {
                   <p className="mt-[6px]">Price: ${ele.price}</p>
                   <p className="mt-[6px]">Shoping Charge: ${2}</p>
                 </div>
-                <div className=" bg-red-200 p-4 rounded-full">
+                {/* <div className=" bg-red-200 p-4 rounded-full">
                   <FaTrashAlt className="text-2xl  text-red-700 " />
-                </div>
+                </div> */}
               </div>
             </div>
           ))}

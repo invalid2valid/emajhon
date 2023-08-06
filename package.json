@@ -10,11 +10,13 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.0.17",
+    "aos": "^2.3.4",
     "firebase": "^9.19.1",
     "lottie-react": "^2.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
+    "react-router": "^6.11.2",
     "react-router-dom": "^6.10.0",
     "react-toastify": "^9.1.2"
   },
